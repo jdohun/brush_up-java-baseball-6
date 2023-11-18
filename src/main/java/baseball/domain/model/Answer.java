@@ -74,9 +74,8 @@ public class Answer {
     public ComparisonResult compareTo(Answer target) {
         int countOfBall = countBall(target);
         int countOfStrike = countStrike(target);
-        boolean isCorrect = countOfStrike == LIMIT_SIZE_OF_ANSWER;
 
-        return new ComparisonResult(countOfBall, countOfStrike, isCorrect);
+        return new ComparisonResult(countOfBall, countOfStrike);
     }
 
     private int countStrike(Answer target) {

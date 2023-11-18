@@ -5,31 +5,35 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import static baseball.domain.model.AnswerConstant.*;
 
 public class Answer {
 
-    private static final Pattern PATTERN_ANSWER = Pattern.compile("^[1-9][1-9][1-9]$");
-    private static final String ANSWER_DELIMITER = "";
-    private static final String ERROR_HAS_DUPLICATE = "중복된 숫자가 존재합니다.";
-    private static final String ERROR_DOES_NOT_FIT_PATTERN = "입력 형식에 맞지 않습니다.";
+    private List<Integer> numbers;
 
-    private List<Integer> answer;
-
-    private Answer(List<Integer> answer) {
-        this.answer = answer;
+    private Answer(List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
-    public static Answer from(List<Integer> autoAnswer) {
-        validateDuplication(autoAnswer);
-        return new Answer(autoAnswer);
+    public static Answer from(List<Integer> autoNumbers) {
+        validateSize(autoNumbers);
+        validateDuplication(autoNumbers);
+        return new Answer(autoNumbers);
     }
 
     public static Answer from(String inputNumbers) {
         validateInput(inputNumbers);
         List<Integer> pendingValidationAnswer = inputToPendingValidationAnswer(inputNumbers);
+        validateSize(pendingValidationAnswer);
         validateDuplication(pendingValidationAnswer);
         return new Answer(pendingValidationAnswer);
+    }
+
+    private static void validateSize(List<Integer> pendingValidationData) {
+        if (pendingValidationData.size() != LIMIT_SIZE_OF_ANSWER) {
+            throw new IllegalArgumentException(ERROR_SIZE_LIMIT_EXCEEDED);
+        }
     }
 
     private static void validateDuplication(List<Integer> pendingValidationData) {
@@ -51,7 +55,7 @@ public class Answer {
     private static List<Integer> inputToPendingValidationAnswer(String inputNumbers) {
         List<Integer> pendingValidationAnswer = new ArrayList<>();
 
-        for (String temp : inputNumbers.split(ANSWER_DELIMITER)) {
+        for (String temp : inputNumbers.split(INPUT_DELIMITER)) {
             pendingValidationAnswer.add(Integer.parseInt(temp));
         }
         return pendingValidationAnswer;

@@ -3,7 +3,22 @@ package baseball.view.output;
 public class OutputView {
     private static final String OUTPUT_START_MESSAGE = "숫자 야구 게임을 시작합니다.";
 
-    public static void printStart(){
+    private OutputView() {
+    }
+
+    public static OutputView getInstance() {
+        return OutputView.OutputViewHolder.outputView;
+    }
+
+    public void printStart() {
         System.out.println(OUTPUT_START_MESSAGE);
+    }
+
+    public void printResult(int countOfBall) {
+        System.out.println(OutputFormat.BALL);
+    }
+
+    private static class OutputViewHolder {
+        private static final OutputView outputView = new OutputView();
     }
 }

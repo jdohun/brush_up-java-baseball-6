@@ -25,8 +25,9 @@ public class AnswerGenerator {
     private List<SingleNumber> createSingleNumbers() {
         return Stream.iterate(ANSWER_NUMBER_GENERATOR.run(), singleNumber
                         -> ANSWER_NUMBER_GENERATOR.run())
+                .distinct()
                 .limit(COUNT_OF_NUMBERS)
-                .distinct().toList();
+                .toList();
     }
 
     public static class Holder {

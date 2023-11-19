@@ -1,5 +1,7 @@
 package baseball.view.output;
 
+import baseball.dto.ComparisonResult;
+
 public class OutputView {
     private static final String OUTPUT_START_MESSAGE = "숫자 야구 게임을 시작합니다.";
 
@@ -14,8 +16,8 @@ public class OutputView {
         System.out.println(OUTPUT_START_MESSAGE);
     }
 
-    public void printResult(int countOfBall) {
-        System.out.println(OutputFormat.BALL);
+    public void printResult(ComparisonResult result) {
+        System.out.println(ResultFormat.getFormatByResult(result));;
     }
 
     private static class OutputViewHolder {

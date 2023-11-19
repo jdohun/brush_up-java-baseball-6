@@ -22,4 +22,29 @@ public class SingleNumber {
     private static boolean isValidate(int number) {
         return number >= START_OF_RANGE && number <= END_OF_RANGE;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (obj == null || !(obj instanceof SingleNumber)) {
+            return false;
+        }
+
+        SingleNumber target = (SingleNumber) obj;
+
+        return number == target.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return number;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("SingleNumber{number=%d}", number);
+    }
 }

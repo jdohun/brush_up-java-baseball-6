@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class AnswerGenerator {
+
+    private static final int COUNT_OF_NUMBERS = Answer.LIMIT_SIZE_OF_ANSWER;
     private final SingleNumberGenerator ANSWER_NUMBER_GENERATOR = SingleNumberGenerator.getInstance();
 
     private AnswerGenerator() {
@@ -20,9 +22,10 @@ public class AnswerGenerator {
         return Answer.from(createSingleNumbers());
     }
 
-    public List<SingleNumber> createSingleNumbers() {
+    private List<SingleNumber> createSingleNumbers() {
         return Stream.iterate(ANSWER_NUMBER_GENERATOR.run(), singleNumber
                         -> ANSWER_NUMBER_GENERATOR.run())
+                .limit(COUNT_OF_NUMBERS)
                 .distinct().toList();
     }
 

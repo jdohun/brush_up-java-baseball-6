@@ -27,8 +27,8 @@ public class Answer {
     }
 
     public static Answer from(String inputNumbers) {
-        validateInput(inputNumbers);
-        List<SingleNumber> singleNumbers = getSingleNumberList(inputNumbers);
+        validateInputFormat(inputNumbers);
+        List<SingleNumber> singleNumbers = inputToSingleNumberList(inputNumbers);
         validateSize(singleNumbers);
         validateDuplication(singleNumbers);
         return new Answer(singleNumbers);
@@ -36,7 +36,7 @@ public class Answer {
 
     private static void validateSize(List<SingleNumber> singleNumbers) {
         if (singleNumbers.size() != LIMIT_SIZE_OF_ANSWER) {
-            throw new IllegalArgumentException(LIMIT_SIZE_OF_ANSWER + "개의 숫자를 가져야 합니다.");
+            throw new IllegalArgumentException(String.format("%d개의 숫자를 가져야 합니다.", LIMIT_SIZE_OF_ANSWER));
         }
     }
 
@@ -46,15 +46,15 @@ public class Answer {
         }
     }
 
-    private static void validateInput(String inputNumbers) {
+    private static void validateInputFormat(String inputNumbers) {
         Matcher matcher = PATTERN_ANSWER.matcher(inputNumbers);
         if (!matcher.matches()) {
             throw new IllegalArgumentException("입력 형식에 맞지 않습니다.");
         }
     }
 
-    private static List<SingleNumber> getSingleNumberList(String inputNumbers) {
-        List<Integer> integers = getIntegerList(inputNumbers);
+    private static List<SingleNumber> inputToSingleNumberList(String inputNumbers) {
+        List<Integer> integers = inputToIntegerList(inputNumbers);
         List<SingleNumber> singleNumbers = new ArrayList<>();
         for (int temp : integers) {
             singleNumbers.add(SingleNumber.from(temp));
@@ -62,7 +62,7 @@ public class Answer {
         return singleNumbers;
     }
 
-    private static List<Integer> getIntegerList(String inputNumbers) {
+    private static List<Integer> inputToIntegerList(String inputNumbers) {
         List<Integer> pendingValidationAnswer = new ArrayList<>();
 
         for (String temp : inputNumbers.split(INPUT_DELIMITER)) {
@@ -80,7 +80,7 @@ public class Answer {
 
     private int countStrike(Answer target) {
         return (int) IntStream.range(0, LIMIT_SIZE_OF_ANSWER)
-                .filter(i -> this.numbers.get(i) == target.numbers.get(i))
+                .filter(i -> this.numbers.get(i).equals(target.numbers.get(i)))
                 .count();
     }
 
@@ -93,6 +93,31 @@ public class Answer {
     private boolean isBallCount(SingleNumber targetNumber, int excludedIndex) {
         return IntStream.range(0, LIMIT_SIZE_OF_ANSWER)
                 .filter(index -> index != excludedIndex)
-                .anyMatch(index -> targetNumber == this.numbers.get(index));
+                .anyMatch(index -> this.numbers.get(index).equals(targetNumber));
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (obj == null || !(obj instanceof Answer)) {
+            return false;
+        }
+
+        Answer target = (Answer) obj;
+
+        return numbers.equals(target.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return numbers.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Answer{numbers=%s}", numbers);
     }
 }

@@ -10,16 +10,17 @@ public class SingleNumber {
     }
 
     public static SingleNumber from(int number) {
+        validateRange(number);
         return new SingleNumber(number);
     }
 
-    private static void validate(int number) {
-        if (!isValidate(number)) {
+    private static void validateRange(int number) {
+        if (!isValidateRange(number)) {
             throw new IllegalArgumentException("입력 가능한 숫자의 범위는" + START_OF_RANGE + "~" + END_OF_RANGE + " 입니다.");
         }
     }
 
-    private static boolean isValidate(int number) {
+    private static boolean isValidateRange(int number) {
         return number >= START_OF_RANGE && number <= END_OF_RANGE;
     }
 

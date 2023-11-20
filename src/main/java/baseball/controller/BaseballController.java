@@ -27,7 +27,7 @@ public class BaseballController {
         computer = ANSWER_GENERATOR.run();
 
         do {
-            Answer userAnswer = Answer.from(InputHandler.inputToIntegerArray(INPUT_VIEW.inputNumbers()));
+            Answer userAnswer = Answer.from(InputHandler.inputToSourceForAnswer(INPUT_VIEW.inputNumbers()));
             comparisonResult = computer.compareTo(userAnswer);
             OUTPUT_VIEW.printResult(comparisonResult);
         } while (Answer.LIMIT_SIZE_OF_ANSWER != comparisonResult.countOfStrike());

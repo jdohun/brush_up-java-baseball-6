@@ -26,13 +26,13 @@
       - [x] 다른 자리에 위치한 같은 값의 개수를 센다.
 
 ### generator
-- ### ThreeRandomNumberGenerator
-  - [x] 중복되지 않는 1-9 사이에 랜덤한 숫자 세 개를 저장한다.
-    - [x] 1-9 사이에 랜덤한 숫자를 생성한다.
-    - [x] 이미 생성된 숫자라면 다시 숫자를 생성한다.
+- ### SingleNumberGenerator
+  - [x] 1-9 사이에 랜덤한 단일 숫자 객체 1개를 생성한다.
 
 - ### AnswerGenerator
-  - [x] ThreeRandomNumberGenerator 를 통해 컴퓨터의 정답을 생성한다.
+  - [x] SingleNumberGenerator 를 통해 자동 정답을 생성한다.
+    - [x] 중복되지 않는 단일 숫자 객체 3개를 생성한다.
+    - [x] 생성된 객체 리스트를 통해 정답 객체를 생성한다.
 
 ### controller
 - [x] 게임 시작

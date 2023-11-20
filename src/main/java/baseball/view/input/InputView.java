@@ -2,11 +2,13 @@ package baseball.view.input;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import static baseball.handler.InputHandler.GAME_OVER;
+import static baseball.handler.InputHandler.RESTART;
+
+
 public class InputView {
     private static final String INPUT_NUMBERS = "숫자를 입력해주세요 : ";
-    private static final int RESTART = 1;
-    private static final int GAME_OVER = 2;
-    private static final String INPUT_RETRY = String.format("게임을 새로 시작하려면 %d, 종료하려면 %d를 입력하세요.", RESTART, GAME_OVER);
+    private static final String INPUT_RESTART = String.format("게임을 새로 시작하려면 %d, 종료하려면 %d를 입력하세요.", RESTART, GAME_OVER);
 
     private InputView() {
     }
@@ -15,13 +17,13 @@ public class InputView {
         return InputViewHolder.inputView;
     }
 
-    public String requestInputNumbers() {
+    public String inputNumbers() {
         System.out.printf(INPUT_NUMBERS);
         return Console.readLine();
     }
 
-    public String requestInputIsRestart() {
-        System.out.println(INPUT_RETRY);
+    public String inputIsRestart() {
+        System.out.println(INPUT_RESTART);
         return Console.readLine();
     }
 

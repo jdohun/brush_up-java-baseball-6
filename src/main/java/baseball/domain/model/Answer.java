@@ -5,14 +5,10 @@ import baseball.dto.ComparisonResult;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
 public class Answer {
     public static final int LIMIT_SIZE_OF_ANSWER = 3;
-    private static final Pattern PATTERN_ANSWER = Pattern.compile("^[1-9][1-9][1-9]$");
-    private static final String INPUT_DELIMITER = "";
 
     private List<SingleNumber> numbers;
 
@@ -26,9 +22,8 @@ public class Answer {
         return new Answer(autoNumbers);
     }
 
-    public static Answer from(String inputNumbers) {
-        validateInputFormat(inputNumbers);
-        List<SingleNumber> singleNumbers = inputToSingleNumberList(inputNumbers);
+    public static Answer from(int[] manualNumbers) {
+        List<SingleNumber> singleNumbers = inputToSingleNumberList(manualNumbers);
         validateSize(singleNumbers);
         validateDuplication(singleNumbers);
         return new Answer(singleNumbers);
@@ -46,29 +41,12 @@ public class Answer {
         }
     }
 
-    private static void validateInputFormat(String inputNumbers) {
-        Matcher matcher = PATTERN_ANSWER.matcher(inputNumbers);
-        if (!matcher.matches()) {
-            throw new IllegalArgumentException("입력 형식에 맞지 않습니다.");
-        }
-    }
-
-    private static List<SingleNumber> inputToSingleNumberList(String inputNumbers) {
-        List<Integer> integers = inputToIntegerList(inputNumbers);
+    private static List<SingleNumber> inputToSingleNumberList(int[] manualNumbers) {
         List<SingleNumber> singleNumbers = new ArrayList<>();
-        for (int temp : integers) {
-            singleNumbers.add(SingleNumber.from(temp));
+        for (int manualNumber : manualNumbers) {
+            singleNumbers.add(SingleNumber.from(manualNumber));
         }
         return singleNumbers;
-    }
-
-    private static List<Integer> inputToIntegerList(String inputNumbers) {
-        List<Integer> pendingValidationAnswer = new ArrayList<>();
-
-        for (String temp : inputNumbers.split(INPUT_DELIMITER)) {
-            pendingValidationAnswer.add(Integer.parseInt(temp));
-        }
-        return pendingValidationAnswer;
     }
 
     public ComparisonResult compareTo(Answer target) {

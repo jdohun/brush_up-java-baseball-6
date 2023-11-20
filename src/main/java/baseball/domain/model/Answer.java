@@ -16,17 +16,10 @@ public class Answer {
         this.numbers = numbers;
     }
 
-    public static Answer from(List<SingleNumber> autoNumbers) {
-        validateSize(autoNumbers);
-        validateDuplication(autoNumbers);
-        return new Answer(autoNumbers);
-    }
-
-    public static Answer from(int[] manualNumbers) {
-        List<SingleNumber> singleNumbers = inputToSingleNumberList(manualNumbers);
-        validateSize(singleNumbers);
-        validateDuplication(singleNumbers);
-        return new Answer(singleNumbers);
+    public static Answer from(List<SingleNumber> numbers) {
+        validateSize(numbers);
+        validateDuplication(numbers);
+        return new Answer(numbers);
     }
 
     private static void validateSize(List<SingleNumber> singleNumbers) {
@@ -39,14 +32,6 @@ public class Answer {
         if (new HashSet<>(singleNumbers).size() != LIMIT_SIZE_OF_ANSWER) {
             throw new IllegalArgumentException("중복된 숫자가 존재합니다.");
         }
-    }
-
-    private static List<SingleNumber> inputToSingleNumberList(int[] manualNumbers) {
-        List<SingleNumber> singleNumbers = new ArrayList<>();
-        for (int manualNumber : manualNumbers) {
-            singleNumbers.add(SingleNumber.from(manualNumber));
-        }
-        return singleNumbers;
     }
 
     public ComparisonResult compareTo(Answer target) {

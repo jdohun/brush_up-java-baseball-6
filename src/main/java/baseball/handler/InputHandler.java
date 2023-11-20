@@ -6,10 +6,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputHandler {
+    private static final Pattern PATTERN_ANSWER = Pattern.compile("^[1-9][1-9][1-9]$");
     public static final Pattern PATTERN_RETRY = Pattern.compile("^[1-2]$");
     public static final int RESTART = 1;
     public static final int GAME_OVER = 2;
-    private static final Pattern PATTERN_ANSWER = Pattern.compile("^[1-9][1-9][1-9]$");
     private static final String INPUT_DELIMITER = "";
 
     private InputHandler() {
@@ -19,14 +19,14 @@ public class InputHandler {
         return Holder.INSTANCE;
     }
 
-    public static int[] inputToIntegerArray(String inputNumbers) {
+    public static int[] inputToSourceForAnswer(String inputNumbers) {
         validateNotNull(inputNumbers);
         validateAnswerFormat(inputNumbers);
 
         String[] splitInputNumbers = inputNumbers.split(INPUT_DELIMITER);
-        int[] pendingValidationAnswer = new int[Answer.LIMIT_SIZE_OF_ANSWER];
+        int[] pendingValidationAnswer = new int[splitInputNumbers.length];
 
-        for (int i = 0; i < Answer.LIMIT_SIZE_OF_ANSWER; i++) {
+        for (int i = 0; i < splitInputNumbers.length; i++) {
             pendingValidationAnswer[i] = Integer.parseInt(splitInputNumbers[i]);
         }
 

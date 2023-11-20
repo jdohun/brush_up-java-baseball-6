@@ -1,7 +1,10 @@
 package baseball.handler;
 
 import baseball.domain.model.Answer;
+import baseball.domain.model.SingleNumber;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,18 +22,16 @@ public class InputHandler {
         return Holder.INSTANCE;
     }
 
-    public static int[] inputToSourceForAnswer(String inputNumbers) {
+    public static List<SingleNumber> inputToSourceForAnswer(String inputNumbers) {
         validateNotNull(inputNumbers);
         validateAnswerFormat(inputNumbers);
 
-        String[] splitInputNumbers = inputNumbers.split(INPUT_DELIMITER);
-        int[] pendingValidationAnswer = new int[splitInputNumbers.length];
-
-        for (int i = 0; i < splitInputNumbers.length; i++) {
-            pendingValidationAnswer[i] = Integer.parseInt(splitInputNumbers[i]);
+        List<SingleNumber> singleNumbers = new ArrayList<>();
+        for (String value: inputNumbers.split(INPUT_DELIMITER)) {
+            singleNumbers.add(SingleNumber.from(Integer.parseInt(value)));
         }
 
-        return pendingValidationAnswer;
+        return singleNumbers;
     }
 
     private static void validateNotNull(String input) {

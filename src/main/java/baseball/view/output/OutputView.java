@@ -22,7 +22,7 @@ public class OutputView {
         System.out.println(ResultFormat.getFormatByResult(result));
     }
 
-    public void printGameOver(){
+    public void printGameOver() {
         System.out.println(OUTPUT_GAME_OVER);
     }
 

@@ -30,7 +30,7 @@ public class BaseballController {
             Answer userAnswer = Answer.from(InputHandler.inputToSourceForAnswer(INPUT_VIEW.inputNumbers()));
             comparisonResult = computer.compareTo(userAnswer);
             OUTPUT_VIEW.printResult(comparisonResult);
-        } while (Answer.LIMIT_SIZE_OF_ANSWER != comparisonResult.countOfStrike());
+        } while (comparisonResult.isCorrect());
 
         OUTPUT_VIEW.printGameOver();
     }

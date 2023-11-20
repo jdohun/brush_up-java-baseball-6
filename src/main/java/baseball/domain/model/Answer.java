@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 public class Answer {
     public static final int LIMIT_SIZE_OF_ANSWER = 3;
 
-    private List<SingleNumber> numbers;
+    private final List<SingleNumber> numbers;
 
     private Answer(List<SingleNumber> numbers) {
         this.numbers = numbers;
@@ -80,11 +80,9 @@ public class Answer {
             return true;
         }
 
-        if (obj == null || !(obj instanceof Answer)) {
+        if (obj == null || !(obj instanceof Answer target)) {
             return false;
         }
-
-        Answer target = (Answer) obj;
 
         return numbers.equals(target.numbers);
     }

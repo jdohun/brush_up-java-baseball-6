@@ -38,7 +38,7 @@ public class Answer {
         int countOfBall = countBall(target);
         int countOfStrike = countStrike(target);
 
-        return new ComparisonResult(countOfBall, countOfStrike);
+        return new ComparisonResult(countOfBall, countOfStrike, LIMIT_SIZE_OF_ANSWER == countOfStrike);
     }
 
     private int countStrike(Answer target) {

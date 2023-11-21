@@ -36,15 +36,41 @@ class SingleNumberTest {
     @DisplayName("동치성 테스트")
     class EqualityTest {
 
-        @DisplayName("의미하는 값을 통해 객체의 같고 다름을 판별할 수 있다.")
+        @DisplayName("자기자신과의 비교는 항상 참이다.")
+        @Test
+        void testEqualWithSelf() {
+            SingleNumber sample1 = SingleNumber.from(3);
+
+            assertThat(sample1).isEqualTo(sample1);
+        }
+
+        @DisplayName("null 과 비교는 같지 않다.")
+        @Test
+        void testEqualWithNull() {
+            SingleNumber sample1 = SingleNumber.from(3);
+
+            assertThat(sample1).isNotEqualTo(null);
+        }
+
+        @DisplayName("SingleNumber 클래스의 하위 클래스가 아니면 같지 않다.")
+        @Test
+        void testEqualWithNotInstanceof() {
+            SingleNumber sample1 = SingleNumber.from(3);
+
+            assertThat(sample1).isNotEqualTo(3);
+        }
+
+        @DisplayName("의미하는 값이 같으면 같은 객체이고 다른 값이면 다른 객체다.")
         @Test
         void testEquals() {
             SingleNumber sample1 = SingleNumber.from(3);
             SingleNumber sample2 = SingleNumber.from(3);
             SingleNumber sample3 = SingleNumber.from(4);
 
-            assertThat(sample1).isEqualTo(sample2)
-                    .isNotEqualTo(sample3);
+            assertThat(sample1).isEqualTo(sample2);
+            assertThat(sample2).isEqualTo(sample1);
+            assertThat(sample3).isNotEqualTo(sample1)
+                    .isNotEqualTo(sample2);
         }
 
         @DisplayName("의미하는 값이 같은 객체는 같은 해시코드를 가진다.")

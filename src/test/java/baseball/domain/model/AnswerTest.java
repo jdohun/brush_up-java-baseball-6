@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -57,7 +58,49 @@ class AnswerTest {
     @DisplayName("동치성 테스트")
     class EqualityTest {
 
-        @DisplayName("의미하는 값을 통해 객체의 같고 다름을 판별할 수 있다.")
+        @DisplayName("자기자신과의 비교는 항상 참이다.")
+        @Test
+        void testEqualWithSelf() {
+            Answer sample1 = Answer.from(Arrays.asList(
+                    SingleNumber.from(1),
+                    SingleNumber.from(2),
+                    SingleNumber.from(3)
+            ));
+
+            assertThat(sample1).isEqualTo(sample1);
+        }
+
+        @DisplayName("null 과 같지 않다.")
+        @Test
+        void testEqualWithNull() {
+            Answer sample1 = Answer.from(Arrays.asList(
+                    SingleNumber.from(1),
+                    SingleNumber.from(2),
+                    SingleNumber.from(3)
+            ));
+
+            assertThat(sample1).isNotEqualTo(null);
+        }
+
+        @DisplayName("Answer 클래스의 하위 클래스가 아니면 같지 않다.")
+        @Test
+        void testEqualWithNotInstanceof() {
+            Answer sample1 = Answer.from(Arrays.asList(
+                    SingleNumber.from(1),
+                    SingleNumber.from(2),
+                    SingleNumber.from(3)
+            ));
+
+            List<SingleNumber> singleNumbers = Arrays.asList(
+                    SingleNumber.from(1),
+                    SingleNumber.from(2),
+                    SingleNumber.from(3)
+            );
+
+            assertThat(sample1).isNotEqualTo(singleNumbers);
+        }
+
+        @DisplayName("의미하는 값이 같으면 같은 객체이고 다른 값이면 다른 객체다.")
         @Test
         void testEquals() {
             Answer sample1 = Answer.from(Arrays.asList(
@@ -76,8 +119,10 @@ class AnswerTest {
                     SingleNumber.from(4)
             ));
 
-            assertThat(sample1).isEqualTo(sample2)
-                    .isNotEqualTo(sample3);
+            assertThat(sample1).isEqualTo(sample2);
+            assertThat(sample2).isEqualTo(sample1);
+            assertThat(sample3).isNotEqualTo(sample1)
+                    .isNotEqualTo(sample2);
         }
 
         @DisplayName("의미하는 값이 같은 객체는 같은 해시코드를 가진다.")

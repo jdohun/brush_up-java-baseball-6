@@ -6,15 +6,15 @@ import baseball.domain.model.SingleNumber;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class AnswerGenerator {
+public class RandomAnswerGenerator {
 
     private static final int COUNT_OF_NUMBERS = Answer.LIMIT_SIZE_OF_ANSWER;
     private final SingleNumberGenerator ANSWER_NUMBER_GENERATOR = SingleNumberGenerator.getInstance();
 
-    private AnswerGenerator() {
+    private RandomAnswerGenerator() {
     }
 
-    public static AnswerGenerator getInstance() {
+    public static RandomAnswerGenerator getInstance() {
         return Holder.ANSWER_GENERATOR;
     }
 
@@ -31,6 +31,6 @@ public class AnswerGenerator {
     }
 
     public static class Holder {
-        private static final AnswerGenerator ANSWER_GENERATOR = new AnswerGenerator();
+        private static final RandomAnswerGenerator ANSWER_GENERATOR = new RandomAnswerGenerator();
     }
 }

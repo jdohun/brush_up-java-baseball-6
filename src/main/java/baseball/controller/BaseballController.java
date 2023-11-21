@@ -2,7 +2,7 @@ package baseball.controller;
 
 import baseball.domain.model.Answer;
 import baseball.dto.ComparisonResult;
-import baseball.generator.AnswerGenerator;
+import baseball.generator.RandomAnswerGenerator;
 import baseball.handler.InputHandler;
 import baseball.view.input.InputView;
 import baseball.view.output.OutputView;
@@ -12,7 +12,7 @@ public class BaseballController {
     private final InputHandler INPUT_HANDLER = InputHandler.getInstance();
     private final InputView INPUT_VIEW = InputView.getInstance();
     private final OutputView OUTPUT_VIEW = OutputView.getInstance();
-    private final AnswerGenerator ANSWER_GENERATOR = AnswerGenerator.getInstance();
+    private final RandomAnswerGenerator RANDOM_ANSWER_GENERATOR = RandomAnswerGenerator.getInstance();
     private Answer computer;
 
     public void run() {
@@ -29,7 +29,7 @@ public class BaseballController {
         OUTPUT_VIEW.printStart();
 
         ComparisonResult comparisonResult;
-        computer = ANSWER_GENERATOR.run();
+        computer = RANDOM_ANSWER_GENERATOR.run();
 
         do {
             Answer userAnswer = Answer.from(InputHandler.inputToSourceForAnswer(INPUT_VIEW.inputNumbers()));

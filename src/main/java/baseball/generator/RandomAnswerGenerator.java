@@ -30,7 +30,7 @@ public class RandomAnswerGenerator {
                 .toList();
     }
 
-    public static class Holder {
+    private static class Holder {
         private static final RandomAnswerGenerator ANSWER_GENERATOR = new RandomAnswerGenerator();
     }
 }

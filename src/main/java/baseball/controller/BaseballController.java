@@ -6,6 +6,7 @@ import baseball.generator.AnswerGenerator;
 import baseball.handler.InputHandler;
 import baseball.view.input.InputView;
 import baseball.view.output.OutputView;
+import camp.nextstep.edu.missionutils.Console;
 
 public class BaseballController {
     private final InputHandler INPUT_HANDLER = InputHandler.getInstance();
@@ -15,9 +16,13 @@ public class BaseballController {
     private Answer computer;
 
     public void run() {
-        do {
-            gameStart();
-        } while (INPUT_HANDLER.inputToRetry(INPUT_VIEW.inputIsRestart()));
+        try {
+            do {
+                gameStart();
+            } while (INPUT_HANDLER.inputToRetry(INPUT_VIEW.inputIsRestart()));
+        } finally {
+            Console.close();
+        }
     }
 
     private void gameStart() {

@@ -22,7 +22,7 @@ public class InputHandler {
         return Holder.INSTANCE;
     }
 
-    public static List<SingleNumber> inputToSourceForAnswer(String inputNumbers) {
+    public List<SingleNumber> inputToSourceForAnswer(String inputNumbers) {
         validateNotNull(inputNumbers);
         validateAnswerFormat(inputNumbers);
 

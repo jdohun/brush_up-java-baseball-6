@@ -32,7 +32,7 @@ public class BaseballController {
         computer = RANDOM_ANSWER_GENERATOR.run();
 
         do {
-            Answer userAnswer = Answer.from(InputHandler.inputToSourceForAnswer(INPUT_VIEW.inputNumbers()));
+            Answer userAnswer = Answer.from(INPUT_HANDLER.inputToSourceForAnswer(INPUT_VIEW.inputNumbers()));
             comparisonResult = computer.compareTo(userAnswer);
             OUTPUT_VIEW.printResult(comparisonResult);
         } while (!comparisonResult.isCorrect());

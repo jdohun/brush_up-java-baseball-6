@@ -4,7 +4,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -25,10 +29,14 @@ class SingleNumberTest {
 
         @DisplayName("범위에 포함된 값은 예외를 발생시키지 않는다.")
         @ParameterizedTest
-        @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 9})
+        @MethodSource("provideValuesInRange")
         void createSingleNumberByValueInRange(int valueInRange) {
             assertThatCode(() -> SingleNumber.from(valueInRange))
                     .doesNotThrowAnyException();
+        }
+
+        private static Stream<Integer> provideValuesInRange() {
+            return IntStream.rangeClosed(SingleNumber.START_OF_RANGE, SingleNumber.END_OF_RANGE).boxed();
         }
     }
 
